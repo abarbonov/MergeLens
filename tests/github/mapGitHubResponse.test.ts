@@ -36,8 +36,6 @@ describe('mapGitHubResponse', () => {
           },
         ],
       },
-      'openai',
-      'codex',
     )
 
     expect(result).toEqual({
@@ -62,7 +60,7 @@ describe('mapGitHubResponse', () => {
           detailsUrl: null,
         },
       ],
-      actionsUrl: 'https://github.com/openai/codex/actions',
+      diffUrl: 'https://github.com/openai/codex/pull/42.diff',
     })
     expect(getPullRequestHeadSha(pullRequestResponse)).toBe('abc123')
   })
@@ -72,8 +70,6 @@ describe('mapGitHubResponse', () => {
       mapGitHubResponse(
         pullRequestResponse,
         { check_runs: [] },
-        'openai',
-        'codex',
       ).checks,
     ).toEqual([])
   })
@@ -94,8 +90,6 @@ describe('mapGitHubResponse', () => {
             },
           ],
         },
-        'openai',
-        'codex',
       )
 
       expect(result.checks[0]?.status).toBe('queued')
@@ -107,8 +101,6 @@ describe('mapGitHubResponse', () => {
       mapGitHubResponse(
         { ...pullRequestResponse, html_url: 'not-a-url' },
         { check_runs: [] },
-        'openai',
-        'codex',
       ),
     ).toThrow()
   })

@@ -21,6 +21,12 @@ const request = {
   },
 }
 
+const unsafeUrls = [
+  'javascript:alert(1)',
+  'data:text/plain,unsafe',
+  'http://github.com/openai/codex/pull/42.diff',
+]
+
 describe('PR toolbar messaging protocol', () => {
   it('defines a typed options-page command response', () => {
     const response: ReturnType<MergeLensProtocolMap['openOptionsPage']> = {
@@ -55,12 +61,88 @@ describe('PR toolbar messaging protocol', () => {
           authorLogin: 'octocat',
         },
         checks: [],
-        actionsUrl: 'https://github.com/openai/codex/actions',
+        diffUrl: 'https://github.com/openai/codex/pull/42.diff',
       },
     }
 
     expect(parseToolbarResponse(response)).toEqual(response)
   })
+
+  it.each(unsafeUrls)(
+    'rejects unsafe diff URL %s in toolbar responses',
+    (diffUrl) => {
+      expect(() =>
+        parseToolbarResponse({
+          status: 'success',
+          correlationId: 'request-1',
+          data: {
+            pullRequest: {
+              title: 'Add toolbar',
+              url: 'https://github.com/openai/codex/pull/42',
+              state: 'open',
+              isDraft: false,
+              authorLogin: 'octocat',
+            },
+            checks: [],
+            diffUrl,
+          },
+        }),
+      ).toThrow('Invalid PR toolbar response')
+    },
+  )
+
+  it.each(unsafeUrls)(
+    'rejects unsafe pull request URL %s in toolbar responses',
+    (url) => {
+      expect(() =>
+        parseToolbarResponse({
+          status: 'success',
+          correlationId: 'request-1',
+          data: {
+            pullRequest: {
+              title: 'Add toolbar',
+              url,
+              state: 'open',
+              isDraft: false,
+              authorLogin: 'octocat',
+            },
+            checks: [],
+            diffUrl: 'https://github.com/openai/codex/pull/42.diff',
+          },
+        }),
+      ).toThrow('Invalid PR toolbar response')
+    },
+  )
+
+  it.each(unsafeUrls)(
+    'rejects unsafe check details URL %s in toolbar responses',
+    (detailsUrl) => {
+      expect(() =>
+        parseToolbarResponse({
+          status: 'success',
+          correlationId: 'request-1',
+          data: {
+            pullRequest: {
+              title: 'Add toolbar',
+              url: 'https://github.com/openai/codex/pull/42',
+              state: 'open',
+              isDraft: false,
+              authorLogin: 'octocat',
+            },
+            checks: [
+              {
+                id: 'check-1',
+                name: 'Unit tests',
+                status: 'success',
+                detailsUrl,
+              },
+            ],
+            diffUrl: 'https://github.com/openai/codex/pull/42.diff',
+          },
+        }),
+      ).toThrow('Invalid PR toolbar response')
+    },
+  )
 
   it('identifies common missing receiver errors', () => {
     expect(

@@ -12,7 +12,7 @@ export interface PullRequestSummary {
 export interface PullRequestToolbarData {
   pullRequest: PullRequestSummary
   checks: CheckSummary[]
-  actionsUrl: string
+  diffUrl: string
   files?: PullRequestFileSummary[]
   filesTruncated?: boolean
   estimation?: PullRequestEstimationResult

@@ -139,8 +139,6 @@ export const getPullRequestHeadSha = (input: unknown): string => {
 export const mapGitHubResponse = (
   pullRequestInput: unknown,
   checkRunsInput: unknown,
-  owner: string,
-  repository: string,
   filesInput?: unknown,
   filesTruncated = false,
 ): PullRequestToolbarData => {
@@ -163,7 +161,7 @@ export const mapGitHubResponse = (
       status: mapCheckStatus(checkRun.status, checkRun.conclusion),
       detailsUrl: checkRun.details_url,
     })),
-    actionsUrl: `https://github.com/${encodeURIComponent(owner)}/${encodeURIComponent(repository)}/actions`,
+    diffUrl: `${pullRequest.html_url}.diff`,
     ...(files === undefined ? {} : { files, filesTruncated }),
   }
 }

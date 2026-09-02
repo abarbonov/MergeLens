@@ -174,12 +174,12 @@ export const checkSummarySchema = z.object({
   id: z.string().min(1),
   name: z.string().min(1),
   status: checkStatusSchema,
-  detailsUrl: z.url().nullable(),
+  detailsUrl: httpsUrlSchema.nullable(),
 })
 
 export const pullRequestSummarySchema = z.object({
   title: z.string(),
-  url: z.url(),
+  url: httpsUrlSchema,
   state: z.enum(['open', 'closed', 'merged']),
   isDraft: z.boolean(),
   authorLogin: z.string().nullable(),
@@ -225,7 +225,7 @@ export const quickLinksDataSchema = z.object({
 export const toolbarDataSchema = z.object({
   pullRequest: pullRequestSummarySchema,
   checks: z.array(checkSummarySchema),
-  actionsUrl: z.url(),
+  diffUrl: httpsUrlSchema,
   quickLinks: quickLinksDataSchema.optional(),
   estimation: z
     .object({

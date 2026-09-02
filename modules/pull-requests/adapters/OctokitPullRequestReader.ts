@@ -193,8 +193,6 @@ export class OctokitPullRequestReader implements PullRequestReader {
       const data = mapGitHubResponse(
         pullRequestResponse.data,
         checkRunsResponse.data,
-        input.owner,
-        input.repository,
         filesData,
         filesTruncated,
       )
