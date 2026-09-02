@@ -26,7 +26,7 @@ const toolbarData = {
     authorLogin: 'octocat',
   },
   checks: [],
-  actionsUrl: 'https://github.com/openai/codex/actions',
+  diffUrl: 'https://github.com/openai/codex/pull/42.diff',
 }
 
 const createReader = (

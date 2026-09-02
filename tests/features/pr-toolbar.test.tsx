@@ -26,7 +26,7 @@ const toolbarData: ToolbarData = {
       detailsUrl: null,
     },
   ],
-  actionsUrl: 'https://github.com/facebook/react/actions',
+  diffUrl: 'https://github.com/facebook/react/pull/42.diff',
 }
 
 const createLocalReviewController = (): LocalReviewController => {
@@ -132,11 +132,13 @@ describe('PRToolbar', () => {
       name: 'Add resilient PR toolbar',
     })
     const checkLink = screen.getByRole('link', { name: /Unit tests/ })
-    const actionsLink = screen.getByRole('link', { name: 'Actions' })
+    const diffLink = screen.getByRole('link', { name: 'Diff' })
 
     expect(pullRequestLink).toHaveAttribute('href', toolbarData.pullRequest.url)
     expect(checkLink).toHaveAttribute('href', toolbarData.checks[0]?.detailsUrl)
-    expect(actionsLink).toHaveAttribute('href', toolbarData.actionsUrl)
+    expect(diffLink).toHaveAttribute('href', toolbarData.diffUrl)
+    expect(diffLink).toHaveAttribute('target', '_blank')
+    expect(diffLink).toHaveAttribute('rel', 'noreferrer')
     expect(pullRequestLink).toHaveAttribute('rel', 'noreferrer')
     expect(screen.getByText('Browser tests').closest('a')).toBeNull()
   })
@@ -179,6 +181,13 @@ describe('PRToolbar', () => {
     expect(
       screen.getByRole('link', { name: 'Preview: success' }),
     ).toHaveAttribute('href', 'https://preview.example.com/')
+    expect(
+      Array.from(
+        screen
+          .getByLabelText('Quick links and deployments')
+          .querySelectorAll('a'),
+      ).map((link) => link.getAttribute('aria-label') ?? link.textContent?.trim()),
+    ).toEqual(['Diff', 'Project docs', 'Preview: success'])
   })
 
   it('preserves toolbar content and offers retry while deployments are unavailable', () => {
@@ -194,7 +203,7 @@ describe('PRToolbar', () => {
         onRetry={onRetry}
       />,
     )
-    expect(screen.getByRole('link', { name: 'Actions' })).toBeVisible()
+    expect(screen.getByRole('link', { name: 'Diff' })).toBeVisible()
     expect(screen.getByRole('status')).toHaveTextContent(
       'Deployments rate limited',
     )
@@ -210,7 +219,7 @@ describe('PRToolbar', () => {
     )
 
     expect(screen.getByText('No checks reported')).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Actions' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Diff' })).toBeInTheDocument()
   })
 
   it('opens settings for a missing token without displaying credentials', () => {

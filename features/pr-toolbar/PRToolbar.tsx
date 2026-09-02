@@ -226,62 +226,72 @@ const SuccessState = ({
 
       <EstimationSummary data={data} />
 
-      {data.quickLinks ? (
-        <div
-          className="pr-toolbar__quick-links"
-          aria-label="Quick links and deployments"
+      <div
+        className="pr-toolbar__quick-links"
+        aria-label="Quick links and deployments"
+      >
+        <a
+          className="pr-toolbar__quick-link pr-toolbar__diff-link"
+          href={data.diffUrl}
+          target="_blank"
+          rel="noreferrer"
         >
-          {data.quickLinks.configuredLinks.map((link) => (
-            <a
-              className="pr-toolbar__quick-link"
-              href={link.url}
-              target="_blank"
-              rel="noreferrer"
-              key={link.id}
-            >
-              {link.label}
-            </a>
-          ))}
-          {data.quickLinks.deployments.map((deployment) => {
-            const content = (
-              <>
-                <span
-                  className={`pr-toolbar__deployment-dot pr-toolbar__deployment-dot--${deployment.state}`}
-                  aria-hidden="true"
-                />
-                <span>{deployment.environment}</span>
-                <span className="pr-toolbar__sr-only">{deployment.state}</span>
-              </>
-            )
-            return deployment.url ? (
+          Diff
+        </a>
+        {data.quickLinks ? (
+          <>
+            {data.quickLinks.configuredLinks.map((link) => (
               <a
-                className="pr-toolbar__deployment"
-                href={deployment.url}
+                className="pr-toolbar__quick-link"
+                href={link.url}
                 target="_blank"
                 rel="noreferrer"
-                aria-label={`${deployment.environment}: ${deployment.state}`}
-                key={deployment.id}
+                key={link.id}
               >
-                {content}
+                {link.label}
               </a>
-            ) : (
-              <span
-                className="pr-toolbar__deployment"
-                aria-label={`${deployment.environment}: ${deployment.state}`}
-                key={deployment.id}
-              >
-                {content}
+            ))}
+            {data.quickLinks.deployments.map((deployment) => {
+              const content = (
+                <>
+                  <span
+                    className={`pr-toolbar__deployment-dot pr-toolbar__deployment-dot--${deployment.state}`}
+                    aria-hidden="true"
+                  />
+                  <span>{deployment.environment}</span>
+                  <span className="pr-toolbar__sr-only">{deployment.state}</span>
+                </>
+              )
+              return deployment.url ? (
+                <a
+                  className="pr-toolbar__deployment"
+                  href={deployment.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${deployment.environment}: ${deployment.state}`}
+                  key={deployment.id}
+                >
+                  {content}
+                </a>
+              ) : (
+                <span
+                  className="pr-toolbar__deployment"
+                  aria-label={`${deployment.environment}: ${deployment.state}`}
+                  key={deployment.id}
+                >
+                  {content}
+                </span>
+              )
+            })}
+            {data.quickLinks.deployments.length === 0 &&
+            data.quickLinks.configuredLinks.length === 0 ? (
+              <span className="pr-toolbar__quick-links-empty">
+                No quick links configured
               </span>
-            )
-          })}
-          {data.quickLinks.deployments.length === 0 &&
-          data.quickLinks.configuredLinks.length === 0 ? (
-            <span className="pr-toolbar__quick-links-empty">
-              No quick links configured
-            </span>
-          ) : null}
-        </div>
-      ) : null}
+            ) : null}
+          </>
+        ) : null}
+      </div>
       {quickLinksStatus === 'loading' ? (
         <span className="pr-toolbar__quick-links-status" role="status">
           Loading deployments
@@ -331,6 +341,12 @@ export const PRToolbar = ({
       hasEstimation: estimation !== undefined,
       estimationBand: estimation?.band,
     })
+
+    if (state.status === 'success') {
+      logger.debug('[FIX] PR toolbar Diff link available', {
+        diffUrl: state.data.diffUrl,
+      })
+    }
 
     if (state.status === 'error') {
       logger.warn('PR toolbar rendered a recoverable error state', {

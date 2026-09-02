@@ -30,7 +30,7 @@ const successResponse = {
       authorLogin: 'sebmarkbage',
     },
     checks: [],
-    actionsUrl: 'https://github.com/facebook/react/actions',
+    diffUrl: 'https://github.com/facebook/react/pull/42.diff',
   },
 }
 
