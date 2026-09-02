@@ -259,7 +259,9 @@ const SuccessState = ({
                     aria-hidden="true"
                   />
                   <span>{deployment.environment}</span>
-                  <span className="pr-toolbar__sr-only">{deployment.state}</span>
+                  <span className="pr-toolbar__sr-only">
+                    {deployment.state}
+                  </span>
                 </>
               )
               return deployment.url ? (

@@ -46,17 +46,17 @@ Open the extension options page and provide a GitHub token with the minimum read
 
 ## Useful Commands
 
-| Command | Purpose |
-| --- | --- |
-| `npm run dev` | Start the Chromium development build |
-| `npm run dev:firefox` | Start the Firefox development build |
-| `npm run build` | Create a production Chromium build |
-| `npm run build:firefox` | Create a production Firefox build |
-| `npm run zip` | Package the Chromium extension |
-| `npm run zip:firefox` | Package the Firefox extension |
-| `npm run compile` | Run TypeScript checks without emitting files |
-| `npm test` | Run the Vitest test suite |
-| `npm run test:e2e` | Run Playwright browser tests |
+| Command                 | Purpose                                      |
+| ----------------------- | -------------------------------------------- |
+| `npm run dev`           | Start the Chromium development build         |
+| `npm run dev:firefox`   | Start the Firefox development build          |
+| `npm run build`         | Create a production Chromium build           |
+| `npm run build:firefox` | Create a production Firefox build            |
+| `npm run zip`           | Package the Chromium extension               |
+| `npm run zip:firefox`   | Package the Firefox extension                |
+| `npm run compile`       | Run TypeScript checks without emitting files |
+| `npm test`              | Run the Vitest test suite                    |
+| `npm run test:e2e`      | Run Playwright browser tests                 |
 
 ## Architecture
 
@@ -70,7 +70,7 @@ shared/        Small cross-cutting browser, GitHub, messaging, logging, and vali
 tests/         Unit, component, integration, and end-to-end coverage
 ```
 
-Entry points compose the extension and delegate behavior to public module APIs. Domain code stays framework-independent; browser APIs, GitHub requests, and persistence are isolated behind adapters. See [`AGENTS.md`](AGENTS.md) and [`.ai-factory/ARCHITECTURE.md`](.ai-factory/ARCHITECTURE.md) for repository conventions and dependency boundaries.
+Entry points compose the extension and delegate behavior to public module APIs. Domain code stays framework-independent; browser APIs, GitHub requests, and persistence are isolated behind adapters.
 
 ## Security and Privacy
 

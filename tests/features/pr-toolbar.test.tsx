@@ -186,7 +186,9 @@ describe('PRToolbar', () => {
         screen
           .getByLabelText('Quick links and deployments')
           .querySelectorAll('a'),
-      ).map((link) => link.getAttribute('aria-label') ?? link.textContent?.trim()),
+      ).map(
+        (link) => link.getAttribute('aria-label') ?? link.textContent?.trim(),
+      ),
     ).toEqual(['Diff', 'Project docs', 'Preview: success'])
   })
 

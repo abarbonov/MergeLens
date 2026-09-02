@@ -42,12 +42,12 @@ const pullRequest: ReviewInboxPullRequest = {
   id: 'pr-42',
   number: 42,
   title: 'Add workspace preferences',
-  url: 'https://github.com/OpenAI/Codex/pull/42',
+  url: 'https://github.com/Octo/Example/pull/42',
   repository: {
-    owner: 'OpenAI',
-    name: 'Codex',
-    fullName: 'OpenAI/Codex',
-    url: 'https://github.com/OpenAI/Codex',
+    owner: 'Octo',
+    name: 'Example',
+    fullName: 'Octo/Example',
+    url: 'https://github.com/Octo/Example',
   },
   authorLogin: 'Octo-Cat',
   isDraft: false,
@@ -82,7 +82,7 @@ describe('workspace preferences domain', () => {
       saveGlobalPreferences: async (preferences) => preferences,
       listRepositoryPreferences: async () => [],
       getRepositoryPreferences: async () => ({
-        repositoryKey: 'openai/codex',
+        repositoryKey: 'octo/example',
         featureFlags: { savedFilters: true },
       }),
       upsertRepositoryPreferences: async () => [],
@@ -90,8 +90,8 @@ describe('workspace preferences domain', () => {
     }
     const resolve = createGetEffectiveWorkspacePreferences(repository)
 
-    await expect(resolve(' OpenAI/Codex ')).resolves.toMatchObject({
-      repositoryKey: 'openai/codex',
+    await expect(resolve(' Octo/Example ')).resolves.toMatchObject({
+      repositoryKey: 'octo/example',
       source: 'repository',
       preferences: {
         featureFlags: { savedFilters: true },
@@ -105,10 +105,10 @@ describe('workspace preferences domain', () => {
   })
   it('creates canonical repository keys', () => {
     expect(
-      createRepositoryKey({ owner: ' OpenAI ', repository: ' Codex ' }),
-    ).toBe('openai/codex')
-    expect(normalizeRepositoryKey(' OpenAI/Codex ')).toBe('openai/codex')
-    expect(() => normalizeRepositoryKey('openai/codex/extra')).toThrow(
+      createRepositoryKey({ owner: ' Octo ', repository: ' Example ' }),
+    ).toBe('octo/example')
+    expect(normalizeRepositoryKey(' Octo/Example ')).toBe('octo/example')
+    expect(() => normalizeRepositoryKey('octo/example/extra')).toThrow(
       WorkspacePreferencesValidationError,
     )
   })
@@ -119,7 +119,7 @@ describe('workspace preferences domain', () => {
         name: '  My reviews  ',
         view: 'assigned',
         criteria: {
-          repositories: ['OpenAI/Codex', 'openai/codex'],
+          repositories: ['Octo/Example', 'octo/example'],
           authors: ['@Octo-Cat', 'octo-cat'],
           draftState: 'any',
         },
@@ -128,7 +128,7 @@ describe('workspace preferences domain', () => {
       name: 'My reviews',
       view: 'assigned',
       criteria: {
-        repositories: ['openai/codex'],
+        repositories: ['octo/example'],
         authors: ['octo-cat'],
         draftState: 'any',
       },
@@ -181,7 +181,7 @@ describe('workspace preferences domain', () => {
           commandPaletteShortcut: 'primary-shift-k',
         },
         {
-          repositoryKey: 'OpenAI/Codex',
+          repositoryKey: 'Octo/Example',
           featureFlags: { savedFilters: true },
           commandPaletteShortcut: 'primary-shift-p',
         },
@@ -198,7 +198,7 @@ describe('workspace preferences domain', () => {
   it('matches normalized inbox items against all filter criteria', () => {
     const filter = createFilter({
       criteria: {
-        repositories: ['openai/codex'],
+        repositories: ['octo/example'],
         authors: ['octo-cat'],
         draftState: 'ready',
       },
@@ -272,13 +272,13 @@ describe('workspace preferences application operations', () => {
       updatePreferences({
         kind: 'repository-upsert',
         preferences: {
-          repositoryKey: ' OpenAI/Codex ',
+          repositoryKey: ' Octo/Example ',
           featureFlags: { savedFilters: false },
         },
       }),
     ).resolves.toMatchObject({ status: 'success' })
     expect(repository.upsertRepositoryPreferences).toHaveBeenCalledWith({
-      repositoryKey: 'openai/codex',
+      repositoryKey: 'octo/example',
       featureFlags: { savedFilters: false },
     })
   })
@@ -305,10 +305,10 @@ describe('workspace preferences application operations', () => {
       },
     })
     await expect(
-      createGetEffectiveWorkspacePreferences(repository)('openai/codex'),
+      createGetEffectiveWorkspacePreferences(repository)('octo/example'),
     ).resolves.toEqual({
       preferences: DEFAULT_WORKSPACE_PREFERENCES,
-      repositoryKey: 'openai/codex',
+      repositoryKey: 'octo/example',
       source: 'default',
     })
   })

@@ -8,7 +8,7 @@ import type {
 } from '@/features/local-review/types'
 import type { SavePullRequestNoteResponse } from '@/shared/messaging/schemas'
 
-const context = { owner: 'OpenAI', repository: 'Codex', pullNumber: 42 }
+const context = { owner: 'Octo', repository: 'Example', pullNumber: 42 }
 
 const template = {
   id: 'template-1',
@@ -45,9 +45,9 @@ const createTransport = (
           body.length === 0
             ? null
             : {
-                prKey: 'openai/codex#42',
-                owner: 'openai',
-                repository: 'codex',
+                prKey: 'octo/example#42',
+                owner: 'octo',
+                repository: 'example',
                 pullNumber: 42,
                 body,
                 updatedAt: '2026-08-14T10:00:00.000Z',
@@ -118,9 +118,9 @@ describe('LocalReviewPanel', () => {
             correlationId,
             data: {
               note: {
-                prKey: 'openai/codex#42',
-                owner: 'openai',
-                repository: 'codex',
+                prKey: 'octo/example#42',
+                owner: 'octo',
+                repository: 'example',
                 pullNumber: 42,
                 body: 'Alpha Beta',
                 updatedAt: '2026-08-14T10:00:00.000Z',
@@ -173,9 +173,9 @@ describe('LocalReviewPanel', () => {
         correlationId: 'panel-2',
         data: {
           note: {
-            prKey: 'openai/codex#42',
-            owner: 'openai',
-            repository: 'codex',
+            prKey: 'octo/example#42',
+            owner: 'octo',
+            repository: 'example',
             pullNumber: 42,
             body: 'Pending review note',
             updatedAt: '2026-08-14T10:00:00.000Z',
@@ -200,9 +200,9 @@ describe('LocalReviewPanel', () => {
           correlationId,
           data: {
             note: {
-              prKey: 'openai/codex#42',
-              owner: 'openai',
-              repository: 'codex',
+              prKey: 'octo/example#42',
+              owner: 'octo',
+              repository: 'example',
               pullNumber: 42,
               body: 'Copy me',
               updatedAt: '2026-08-14T10:00:00.000Z',

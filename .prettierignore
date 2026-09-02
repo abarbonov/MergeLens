@@ -7,3 +7,4 @@ dist/
 fixtures/
 public/icon/*.png
 package-lock.json
+.*/

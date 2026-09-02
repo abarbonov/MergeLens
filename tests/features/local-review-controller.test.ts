@@ -9,8 +9,8 @@ import type {
   SavePullRequestNoteResponse,
 } from '@/shared/messaging/schemas'
 
-const contextA = { owner: 'OpenAI', repository: 'Codex', pullNumber: 42 }
-const contextB = { owner: 'OpenAI', repository: 'Codex', pullNumber: 43 }
+const contextA = { owner: 'Octo', repository: 'Example', pullNumber: 42 }
+const contextB = { owner: 'Octo', repository: 'Example', pullNumber: 43 }
 
 type WorkspaceSuccess = Extract<
   GetLocalReviewWorkspaceResponse,
@@ -28,9 +28,9 @@ const workspaceResponse = (
     note:
       body.length > 0
         ? {
-            prKey: 'openai/codex#42',
-            owner: 'openai',
-            repository: 'codex',
+            prKey: 'octo/example#42',
+            owner: 'octo',
+            repository: 'example',
             pullNumber: 42,
             body,
             updatedAt: '2026-08-14T10:00:00.000Z',
@@ -47,9 +47,9 @@ const saveResponse = (correlationId: string, body: string): SaveSuccess => ({
     note:
       body.length > 0
         ? {
-            prKey: 'openai/codex#42',
-            owner: 'openai',
-            repository: 'codex',
+            prKey: 'octo/example#42',
+            owner: 'octo',
+            repository: 'example',
             pullNumber: 42,
             body,
             updatedAt: '2026-08-14T10:00:00.000Z',
@@ -123,9 +123,9 @@ describe('localReviewController', () => {
           data: {
             ...workspaceResponse(correlationId, 'PR 43 draft').data,
             note: {
-              prKey: 'openai/codex#43',
-              owner: 'openai',
-              repository: 'codex',
+              prKey: 'octo/example#43',
+              owner: 'octo',
+              repository: 'example',
               pullNumber: 43,
               body: 'PR 43 draft',
               updatedAt: '2026-08-14T10:00:00.000Z',
@@ -138,7 +138,7 @@ describe('localReviewController', () => {
     controller.reconcileContext(contextB)
     await settle()
     expect(controller.getState()).toMatchObject({
-      context: { prKey: 'openai/codex#43' },
+      context: { prKey: 'octo/example#43' },
       loadStatus: 'ready',
       draft: 'PR 43 draft',
     })
@@ -146,7 +146,7 @@ describe('localReviewController', () => {
     firstLoad.resolve(workspaceResponse('correlation-1', 'stale PR 42 draft'))
     await settle()
     expect(controller.getState()).toMatchObject({
-      context: { prKey: 'openai/codex#43' },
+      context: { prKey: 'octo/example#43' },
       draft: 'PR 43 draft',
     })
   })
@@ -192,12 +192,12 @@ describe('localReviewController', () => {
 
     controller.setDraft('PR 42 pending draft')
     controller.reconcileContext({
-      owner: 'openai',
-      repository: 'CODEX',
+      owner: 'octo',
+      repository: 'EXAMPLE',
       pullNumber: 42,
     })
     expect(controller.getState()).toMatchObject({
-      context: { prKey: 'openai/codex#42' },
+      context: { prKey: 'octo/example#42' },
       draft: 'PR 42 pending draft',
       saveStatus: 'dirty',
     })
@@ -209,7 +209,7 @@ describe('localReviewController', () => {
       'PR 42 pending draft',
       expect.any(String),
     )
-    expect(controller.getState().context.prKey).toBe('openai/codex#43')
+    expect(controller.getState().context.prKey).toBe('octo/example#43')
   })
 
   it('inserts templates before a selection and rejects oversized drafts', async () => {

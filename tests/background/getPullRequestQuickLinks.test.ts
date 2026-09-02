@@ -22,12 +22,10 @@ const request = {
 describe('getPullRequestQuickLinks', () => {
   it('preserves correlation ID and normalized data', async () => {
     const reader: QuickLinksReader = {
-      read: vi
-        .fn()
-        .mockResolvedValue({
-          status: 'success',
-          data: { deployments: [], configuredLinks: [] },
-        }),
+      read: vi.fn().mockResolvedValue({
+        status: 'success',
+        data: { deployments: [], configuredLinks: [] },
+      }),
     }
     await expect(
       createGetPullRequestQuickLinks(reader)(request),

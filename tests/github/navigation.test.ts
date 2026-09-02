@@ -6,7 +6,7 @@ import {
 
 describe('observePageContext', () => {
   it('publishes initial and distinct WXT location changes once', () => {
-    window.history.replaceState({}, '', '/openai/codex/pull/1')
+    window.history.replaceState({}, '', '/octo/example/pull/1')
     let locationChangeListener:
       ((event: LocationChangeDetail) => void) | undefined
     const handler = vi.fn()
@@ -18,13 +18,13 @@ describe('observePageContext', () => {
 
     observePageContext(context, window, handler)
     locationChangeListener?.({
-      newUrl: new URL('https://github.com/openai/codex/pull/2'),
+      newUrl: new URL('https://github.com/octo/example/pull/2'),
     })
     locationChangeListener?.({
-      newUrl: new URL('https://github.com/openai/codex/pull/2/files'),
+      newUrl: new URL('https://github.com/octo/example/pull/2/files'),
     })
     locationChangeListener?.({
-      newUrl: new URL('https://github.com/openai/codex/issues/2'),
+      newUrl: new URL('https://github.com/octo/example/issues/2'),
     })
 
     expect(handler).toHaveBeenCalledTimes(3)

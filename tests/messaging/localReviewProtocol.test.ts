@@ -25,8 +25,8 @@ import {
 } from '@/shared/messaging/protocol'
 
 const context = {
-  owner: 'OpenAI',
-  repository: 'Codex',
+  owner: 'Octo',
+  repository: 'Example',
   pullNumber: 42,
 }
 

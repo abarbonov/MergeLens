@@ -10,8 +10,8 @@ import {
 } from '@/modules/local-review'
 
 const context = {
-  owner: 'OpenAI',
-  repository: 'Codex',
+  owner: 'Octo',
+  repository: 'Example',
   pullNumber: 42,
 }
 
@@ -40,10 +40,10 @@ describe('local review background messaging boundary', () => {
       data: { note: null, templates: [] },
     })
     expect(repository.readNote).toHaveBeenCalledWith({
-      owner: 'openai',
-      repository: 'codex',
+      owner: 'octo',
+      repository: 'example',
       pullNumber: 42,
-      prKey: 'openai/codex#42',
+      prKey: 'octo/example#42',
     })
   })
 
@@ -110,7 +110,7 @@ describe('local review background messaging boundary', () => {
       }),
     ).resolves.toMatchObject({
       status: 'success',
-      data: { note: { prKey: 'openai/codex#42', body: 'Private note' } },
+      data: { note: { prKey: 'octo/example#42', body: 'Private note' } },
     })
     await expect(
       upsertTemplate({

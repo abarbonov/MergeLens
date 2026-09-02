@@ -66,8 +66,8 @@ class InMemoryLocalReviewRepository implements LocalReviewRepository {
 }
 
 const context = {
-  owner: 'OpenAI',
-  repository: 'Codex',
+  owner: 'Octo',
+  repository: 'Example',
   pullNumber: 42,
 }
 
@@ -109,7 +109,7 @@ describe('local review application use cases', () => {
       status: 'success',
       correlationId: 'workspace-1',
       data: {
-        note: { prKey: 'openai/codex#42', body: 'Private draft' },
+        note: { prKey: 'octo/example#42', body: 'Private draft' },
       },
     })
     expect(
@@ -156,7 +156,7 @@ describe('local review application use cases', () => {
       correlationId: 'note-1',
       data: {
         note: {
-          prKey: 'openai/codex#42',
+          prKey: 'octo/example#42',
           body: 'Keep this local',
           updatedAt: '2026-08-14T11:00:00.000Z',
         },

@@ -14,17 +14,17 @@ const request = {
   correlationId: 'request-1',
   context: {
     kind: 'pull-request' as const,
-    owner: 'openai',
-    repository: 'codex',
+    owner: 'octo',
+    repository: 'example',
     pullNumber: 42,
-    url: 'https://github.com/openai/codex/pull/42',
+    url: 'https://github.com/octo/example/pull/42',
   },
 }
 
 const unsafeUrls = [
   'javascript:alert(1)',
   'data:text/plain,unsafe',
-  'http://github.com/openai/codex/pull/42.diff',
+  'http://github.com/octo/example/pull/42.diff',
 ]
 
 describe('PR toolbar messaging protocol', () => {
@@ -55,13 +55,13 @@ describe('PR toolbar messaging protocol', () => {
       data: {
         pullRequest: {
           title: 'Add toolbar',
-          url: 'https://github.com/openai/codex/pull/42',
+          url: 'https://github.com/octo/example/pull/42',
           state: 'open' as const,
           isDraft: false,
           authorLogin: 'octocat',
         },
         checks: [],
-        diffUrl: 'https://github.com/openai/codex/pull/42.diff',
+        diffUrl: 'https://github.com/octo/example/pull/42.diff',
       },
     }
 
@@ -78,7 +78,7 @@ describe('PR toolbar messaging protocol', () => {
           data: {
             pullRequest: {
               title: 'Add toolbar',
-              url: 'https://github.com/openai/codex/pull/42',
+              url: 'https://github.com/octo/example/pull/42',
               state: 'open',
               isDraft: false,
               authorLogin: 'octocat',
@@ -107,7 +107,7 @@ describe('PR toolbar messaging protocol', () => {
               authorLogin: 'octocat',
             },
             checks: [],
-            diffUrl: 'https://github.com/openai/codex/pull/42.diff',
+            diffUrl: 'https://github.com/octo/example/pull/42.diff',
           },
         }),
       ).toThrow('Invalid PR toolbar response')
@@ -124,7 +124,7 @@ describe('PR toolbar messaging protocol', () => {
           data: {
             pullRequest: {
               title: 'Add toolbar',
-              url: 'https://github.com/openai/codex/pull/42',
+              url: 'https://github.com/octo/example/pull/42',
               state: 'open',
               isDraft: false,
               authorLogin: 'octocat',
@@ -137,7 +137,7 @@ describe('PR toolbar messaging protocol', () => {
                 detailsUrl,
               },
             ],
-            diffUrl: 'https://github.com/openai/codex/pull/42.diff',
+            diffUrl: 'https://github.com/octo/example/pull/42.diff',
           },
         }),
       ).toThrow('Invalid PR toolbar response')
