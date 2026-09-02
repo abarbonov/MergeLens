@@ -96,14 +96,14 @@ describe('WxtWorkspacePreferencesRepository', () => {
 
     await repository.upsertSavedFilter(createFilter('z', ' Zeta '))
     const saved = await repository.upsertSavedFilter(
-      createFilter('a', 'Alpha', ['OpenAI/Codex']),
+      createFilter('a', 'Alpha', ['Octo/Example']),
     )
 
     expect(saved.map(({ id, name }) => ({ id, name }))).toEqual([
       { id: 'a', name: 'Alpha' },
       { id: 'z', name: 'Zeta' },
     ])
-    expect(saved[0]?.criteria.repositories).toEqual(['openai/codex'])
+    expect(saved[0]?.criteria.repositories).toEqual(['octo/example'])
     await expect(repository.deleteSavedFilter('z')).resolves.toHaveLength(1)
   })
 

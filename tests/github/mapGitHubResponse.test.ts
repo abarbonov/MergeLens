@@ -5,7 +5,7 @@ import {
 } from '@/modules/pull-requests/adapters/mapGitHubResponse'
 
 const pullRequestResponse = {
-  html_url: 'https://github.com/openai/codex/pull/42',
+  html_url: 'https://github.com/octo/example/pull/42',
   title: 'Add PR toolbar',
   state: 'closed',
   merged: true,
@@ -16,32 +16,29 @@ const pullRequestResponse = {
 
 describe('mapGitHubResponse', () => {
   it('maps a pull request and check runs into normalized toolbar data', () => {
-    const result = mapGitHubResponse(
-      pullRequestResponse,
-      {
-        check_runs: [
-          {
-            id: 10,
-            name: 'Unit tests',
-            status: 'completed',
-            conclusion: 'success',
-            details_url: 'https://github.com/openai/codex/actions/runs/1',
-          },
-          {
-            id: 11,
-            name: 'Browser tests',
-            status: 'in_progress',
-            conclusion: null,
-            details_url: null,
-          },
-        ],
-      },
-    )
+    const result = mapGitHubResponse(pullRequestResponse, {
+      check_runs: [
+        {
+          id: 10,
+          name: 'Unit tests',
+          status: 'completed',
+          conclusion: 'success',
+          details_url: 'https://github.com/octo/example/actions/runs/1',
+        },
+        {
+          id: 11,
+          name: 'Browser tests',
+          status: 'in_progress',
+          conclusion: null,
+          details_url: null,
+        },
+      ],
+    })
 
     expect(result).toEqual({
       pullRequest: {
         title: 'Add PR toolbar',
-        url: 'https://github.com/openai/codex/pull/42',
+        url: 'https://github.com/octo/example/pull/42',
         state: 'merged',
         isDraft: false,
         authorLogin: 'octocat',
@@ -51,7 +48,7 @@ describe('mapGitHubResponse', () => {
           id: '10',
           name: 'Unit tests',
           status: 'success',
-          detailsUrl: 'https://github.com/openai/codex/actions/runs/1',
+          detailsUrl: 'https://github.com/octo/example/actions/runs/1',
         },
         {
           id: '11',
@@ -60,37 +57,31 @@ describe('mapGitHubResponse', () => {
           detailsUrl: null,
         },
       ],
-      diffUrl: 'https://github.com/openai/codex/pull/42.diff',
+      diffUrl: 'https://github.com/octo/example/pull/42.diff',
     })
     expect(getPullRequestHeadSha(pullRequestResponse)).toBe('abc123')
   })
 
   it('supports an empty checks response', () => {
     expect(
-      mapGitHubResponse(
-        pullRequestResponse,
-        { check_runs: [] },
-      ).checks,
+      mapGitHubResponse(pullRequestResponse, { check_runs: [] }).checks,
     ).toEqual([])
   })
 
   it.each(['waiting', 'requested'] as const)(
     'maps the GitHub %s state to queued',
     (status) => {
-      const result = mapGitHubResponse(
-        pullRequestResponse,
-        {
-          check_runs: [
-            {
-              id: 12,
-              name: 'Queued workflow',
-              status,
-              conclusion: null,
-              details_url: null,
-            },
-          ],
-        },
-      )
+      const result = mapGitHubResponse(pullRequestResponse, {
+        check_runs: [
+          {
+            id: 12,
+            name: 'Queued workflow',
+            status,
+            conclusion: null,
+            details_url: null,
+          },
+        ],
+      })
 
       expect(result.checks[0]?.status).toBe('queued')
     },

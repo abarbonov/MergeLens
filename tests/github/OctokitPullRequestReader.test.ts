@@ -6,7 +6,7 @@ vi.mock('@/shared/github/auth/localToken', () => ({
 }))
 
 const pullRequestData = {
-  html_url: 'https://github.com/openai/codex/pull/42',
+  html_url: 'https://github.com/octo/example/pull/42',
   title: 'Add PR toolbar',
   state: 'open',
   merged: false,
@@ -15,7 +15,7 @@ const pullRequestData = {
   head: { sha: 'abc123' },
 }
 
-const input = { owner: 'openai', repository: 'codex', pullNumber: 42 }
+const input = { owner: 'octo', repository: 'example', pullNumber: 42 }
 
 const createClient = (
   pullsGet: ReturnType<typeof vi.fn>,
@@ -74,13 +74,13 @@ describe('OctokitPullRequestReader', () => {
     expect(result).toMatchObject({ status: 'success', data: { checks: [] } })
     expect(clientFactory).toHaveBeenCalledWith('test-token')
     expect(pullsGet).toHaveBeenCalledWith({
-      owner: 'openai',
-      repo: 'codex',
+      owner: 'octo',
+      repo: 'example',
       pull_number: 42,
     })
     expect(checksListForRef).toHaveBeenCalledWith({
-      owner: 'openai',
-      repo: 'codex',
+      owner: 'octo',
+      repo: 'example',
       ref: 'abc123',
       per_page: 100,
     })

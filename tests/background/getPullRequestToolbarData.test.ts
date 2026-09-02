@@ -10,23 +10,23 @@ const request = {
   correlationId: 'request-1',
   context: {
     kind: 'pull-request' as const,
-    owner: 'openai',
-    repository: 'codex',
+    owner: 'octo',
+    repository: 'example',
     pullNumber: 42,
-    url: 'https://github.com/openai/codex/pull/42',
+    url: 'https://github.com/octo/example/pull/42',
   },
 }
 
 const toolbarData = {
   pullRequest: {
     title: 'Add PR toolbar',
-    url: 'https://github.com/openai/codex/pull/42',
+    url: 'https://github.com/octo/example/pull/42',
     state: 'open' as const,
     isDraft: false,
     authorLogin: 'octocat',
   },
   checks: [],
-  diffUrl: 'https://github.com/openai/codex/pull/42.diff',
+  diffUrl: 'https://github.com/octo/example/pull/42.diff',
 }
 
 const createReader = (
@@ -46,8 +46,8 @@ describe('getPullRequestToolbarData', () => {
       data: toolbarData,
     })
     expect(reader.read).toHaveBeenCalledWith({
-      owner: 'openai',
-      repository: 'codex',
+      owner: 'octo',
+      repository: 'example',
       pullNumber: 42,
     })
   })

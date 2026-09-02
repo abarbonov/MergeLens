@@ -14,7 +14,7 @@ describe('pull request estimation preferences', () => {
         },
       },
       {
-        repositoryKey: 'OpenAI/Codex',
+        repositoryKey: 'Octo/Example',
         pullRequestEstimation: { weights: { checks: 3 } },
       },
     )
