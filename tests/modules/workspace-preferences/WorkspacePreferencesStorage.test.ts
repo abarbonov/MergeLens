@@ -20,8 +20,11 @@ const loggerMock = vi.hoisted(() => ({
   error: vi.fn(),
 }))
 
-vi.mock('@/shared/logging/logger', () => ({
-  createLogger: () => loggerMock,
+vi.mock('@/shared/logging', () => ({
+  logger: {
+    ...loggerMock,
+    child: () => loggerMock,
+  },
 }))
 
 vi.mock('wxt/utils/storage', () => ({

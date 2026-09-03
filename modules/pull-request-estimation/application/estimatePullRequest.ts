@@ -1,4 +1,4 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import type {
   PullRequestEstimationBand,
   PullRequestEstimationHeuristics,
@@ -12,7 +12,7 @@ import type {
   PullRequestEstimationHeuristicsOverrides,
 } from './contracts'
 
-const logger = createLogger('pullRequestEstimation.estimate')
+const logger = rootLogger.child({ scope: "pullRequestEstimation.estimate" })
 
 const clamp = (value: number, minimum = 0, maximum = 1): number =>
   Math.min(maximum, Math.max(minimum, value))

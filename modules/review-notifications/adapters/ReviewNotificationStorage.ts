@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { storage, type WxtStorageItem } from 'wxt/utils/storage'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import {
   DEFAULT_REVIEW_NOTIFICATION_PREFERENCES,
   EMPTY_REVIEW_NOTIFICATION_SNAPSHOT,
@@ -15,7 +15,7 @@ import {
 } from '../domain/ReviewNotification'
 import type { ReviewNotificationStateRepository } from '../ports/ReviewNotificationStateRepository'
 
-const logger = createLogger('reviewNotifications.storage')
+const logger = rootLogger.child({ scope: "reviewNotifications.storage" })
 const MAX_STORAGE_BYTES = 7_500
 const PREFERENCES_KEY = 'sync:reviewNotifications.preferences'
 const STATE_KEY = 'local:reviewNotifications.state'

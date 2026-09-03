@@ -6,11 +6,11 @@ import { ReviewInbox } from '@/features/review-inbox/ReviewInbox'
 import { useActiveRepositoryKey } from '@/features/review-inbox/useActiveRepositoryKey'
 import { useReviewInboxQuery } from '@/features/review-inbox/useReviewInboxQuery'
 import { useWorkspacePreferences } from '@/features/review-inbox/useWorkspacePreferences'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import { sendMessage } from '@/shared/messaging/protocol'
 import './App.css'
 
-const logger = createLogger('popup.app')
+const logger = rootLogger.child({ scope: "popup.app" })
 
 const App = () => {
   const repositoryKey = useActiveRepositoryKey()

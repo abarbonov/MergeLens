@@ -1,4 +1,4 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import {
   parseToolbarRequest,
   parseToolbarResponse,
@@ -10,7 +10,7 @@ import type {
 import type { PullRequestReader } from '../ports/PullRequestReader'
 import { estimatePullRequest } from '@/modules/pull-request-estimation'
 
-const logger = createLogger('pullRequests.getToolbarData')
+const logger = rootLogger.child({ scope: "pullRequests.getToolbarData" })
 
 const getSafeCorrelationId = (input: unknown): string => {
   if (typeof input === 'string' && input.length >= 1 && input.length <= 128) {

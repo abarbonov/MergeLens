@@ -7,7 +7,7 @@ import {
   type KeyboardEvent,
 } from 'react'
 import { MAX_PULL_REQUEST_NOTE_LENGTH } from '@/modules/local-review'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import type {
   LocalReviewControllerError,
   LocalReviewPanelProps,
@@ -15,7 +15,7 @@ import type {
 } from './types'
 import './LocalReviewPanel.css'
 
-const logger = createLogger('localReview.ui')
+const logger = rootLogger.child({ scope: "localReview.ui" })
 
 const SAVE_LABELS: Record<LocalReviewSaveStatus, string> = {
   idle: 'Ready',

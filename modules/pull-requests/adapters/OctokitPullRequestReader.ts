@@ -1,7 +1,7 @@
 import { Octokit } from '@octokit/rest'
 import { z } from 'zod'
 import { readLocalGitHubToken } from '@/shared/github/auth/localToken'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import type {
   PullRequestReader,
   PullRequestReadResult,
@@ -9,7 +9,7 @@ import type {
 } from '../ports/PullRequestReader'
 import { getPullRequestHeadSha, mapGitHubResponse } from './mapGitHubResponse'
 
-const logger = createLogger('github.api.pullRequestReader')
+const logger = rootLogger.child({ scope: "github.api.pullRequestReader" })
 
 type TokenReader = () => Promise<string | null>
 type GitHubClient = Pick<Octokit, 'rest'>

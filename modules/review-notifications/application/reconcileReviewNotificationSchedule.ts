@@ -1,7 +1,7 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import type { ReconcileReviewNotificationScheduleDependencies } from './contracts'
 
-const logger = createLogger('reviewNotifications.reconcileSchedule')
+const logger = rootLogger.child({ scope: "reviewNotifications.reconcileSchedule" })
 
 export type ReviewNotificationScheduleOutcome =
   | { status: 'scheduled'; intervalMinutes: number; changed: boolean }

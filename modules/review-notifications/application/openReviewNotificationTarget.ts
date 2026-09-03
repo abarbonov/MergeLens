@@ -1,8 +1,8 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import { REVIEW_NOTIFICATION_ID_PREFIX } from '../domain/ReviewNotification'
 import type { OpenReviewNotificationTargetDependencies } from './contracts'
 
-const logger = createLogger('reviewNotifications.openTarget')
+const logger = rootLogger.child({ scope: "reviewNotifications.openTarget" })
 
 export const createOpenReviewNotificationTarget =
   (dependencies: OpenReviewNotificationTargetDependencies) =>

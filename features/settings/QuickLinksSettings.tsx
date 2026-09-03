@@ -6,9 +6,9 @@ import {
   saveConfiguredQuickLink,
 } from '@/modules/quick-links/settings'
 import type { ConfiguredQuickLink } from '@/modules/quick-links'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 
-const logger = createLogger('settings.quickLinks')
+const logger = rootLogger.child({ scope: "settings.quickLinks" })
 
 export const QuickLinksSettings = () => {
   const [links, setLinks] = useState<ConfiguredQuickLink[]>([])

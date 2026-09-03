@@ -12,10 +12,10 @@ import type {
   PortableLocalDataImportPreview,
   PreviewPortableLocalDataImportResult,
 } from '@/modules/portable-local-data'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import './PortableLocalDataSettings.css'
 
-const logger = createLogger('settings.portableLocalData')
+const logger = rootLogger.child({ scope: "settings.portableLocalData" })
 
 const CATEGORIES: readonly PortableDataConflictCategory[] = [
   'notes',

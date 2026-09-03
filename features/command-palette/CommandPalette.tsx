@@ -1,12 +1,12 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import { createCommandRegistry } from './commandRegistry'
 import { builtInCommands } from './commands/builtInCommands'
 import type { CommandContext, CommandId, CommandShortcut } from './types'
 import { DEFAULT_COMMAND_SHORTCUT } from './shortcuts'
 import './CommandPalette.css'
 
-const logger = createLogger('commandPalette.ui')
+const logger = rootLogger.child({ scope: "commandPalette.ui" })
 const registry = createCommandRegistry(builtInCommands)
 
 export interface CommandPaletteProps {

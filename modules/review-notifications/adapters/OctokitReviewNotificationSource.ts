@@ -2,11 +2,11 @@ import {
   OctokitReviewInboxReader,
   type ReviewInboxReader,
 } from '@/modules/pull-requests'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import type { ReviewNotificationSourceResult } from '../domain/ReviewNotification'
 import type { ReviewNotificationSource } from '../ports/ReviewNotificationSource'
 
-const logger = createLogger('reviewNotifications.githubSource')
+const logger = rootLogger.child({ scope: "reviewNotifications.githubSource" })
 const POLL_LIMIT = 20
 
 export class OctokitReviewNotificationSource implements ReviewNotificationSource {

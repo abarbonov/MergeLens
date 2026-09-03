@@ -1,7 +1,7 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import type { ReviewNotificationPermissionGateway } from '../ports/ReviewNotificationBrowser'
 
-const logger = createLogger('reviewNotifications.permission')
+const logger = rootLogger.child({ scope: "reviewNotifications.permission" })
 const notificationPermission: Browser.permissions.Permissions = {
   permissions: ['notifications'],
 }

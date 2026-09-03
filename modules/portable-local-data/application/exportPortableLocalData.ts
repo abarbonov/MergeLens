@@ -1,7 +1,7 @@
 import type { LocalReviewRepository } from '@/modules/local-review'
 import type { ReviewNotificationStateRepository } from '@/modules/review-notifications'
 import type { WorkspacePreferencesRepository } from '@/modules/workspace-preferences'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import {
   PORTABLE_LOCAL_DATA_FORMAT,
   PORTABLE_LOCAL_DATA_SCHEMA_VERSION,
@@ -13,7 +13,7 @@ import type {
   PortableLocalDataCounts,
 } from './contracts'
 
-const logger = createLogger('portableLocalData.export')
+const logger = rootLogger.child({ scope: "portableLocalData.export" })
 
 export interface ExportPortableLocalDataDependencies {
   localReviewRepository: LocalReviewRepository

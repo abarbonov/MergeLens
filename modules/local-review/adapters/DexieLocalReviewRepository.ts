@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import {
   MAX_PULL_REQUEST_NOTE_LENGTH,
   MAX_REVIEW_TEMPLATE_BODY_LENGTH,
@@ -22,7 +22,7 @@ import {
   type StoredReviewTemplate,
 } from './LocalReviewDatabase'
 
-const logger = createLogger('localReview.dexieRepository')
+const logger = rootLogger.child({ scope: "localReview.dexieRepository" })
 
 const storedPullRequestNoteSchema = z.object({
   schemaVersion: z.literal(1),

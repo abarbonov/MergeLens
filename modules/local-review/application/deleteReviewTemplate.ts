@@ -1,4 +1,4 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import {
   parseDeleteReviewTemplateRequest,
   parseDeleteReviewTemplateResponse,
@@ -18,7 +18,7 @@ import {
   toLocalReviewError,
 } from './operation'
 
-const logger = createLogger('localReview.deleteTemplate')
+const logger = rootLogger.child({ scope: "localReview.deleteTemplate" })
 
 export const createDeleteReviewTemplate = (
   repository: LocalReviewRepository,

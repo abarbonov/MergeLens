@@ -1,8 +1,8 @@
 import { z } from 'zod'
 import { storage } from 'wxt/utils/storage'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 
-const logger = createLogger('github.auth.localToken')
+const logger = rootLogger.child({ scope: "github.auth.localToken" })
 const githubTokenSchema = z.string().trim().min(1)
 const githubTokenItem = storage.defineItem<string | null>('local:githubToken', {
   fallback: null,

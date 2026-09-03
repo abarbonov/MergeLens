@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { createCommandContext } from '@/features/command-palette/commands/context'
 import { createRepositoryKey } from '@/modules/workspace-preferences'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 
-const logger = createLogger('reviewInbox.activeRepository')
+const logger = rootLogger.child({ scope: "reviewInbox.activeRepository" })
 
 export const useActiveRepositoryKey = (): string | null => {
   const [repositoryKey, setRepositoryKey] = useState<string | null>(null)

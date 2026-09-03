@@ -1,4 +1,4 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import {
   parseUpsertReviewTemplateRequest,
   parseUpsertReviewTemplateResponse,
@@ -20,7 +20,7 @@ import {
   toLocalReviewError,
 } from './operation'
 
-const logger = createLogger('localReview.upsertTemplate')
+const logger = rootLogger.child({ scope: "localReview.upsertTemplate" })
 
 export const createUpsertReviewTemplate = (
   repository: LocalReviewRepository,

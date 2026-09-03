@@ -1,7 +1,7 @@
 import { Octokit } from '@octokit/rest'
 import { z } from 'zod'
 import { readLocalGitHubToken } from '@/shared/github/auth/localToken'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import type { ConfiguredQuickLink, QuickLinksError } from '../domain/QuickLinks'
 import type {
   QuickLinksReader,
@@ -10,7 +10,7 @@ import type {
 } from '../ports/QuickLinksReader'
 import { mapQuickLinksResponse } from './mapQuickLinksResponse'
 
-const logger = createLogger('github.api.quickLinksReader')
+const logger = rootLogger.child({ scope: "github.api.quickLinksReader" })
 const MAX_DEPLOYMENTS = 6
 
 type TokenReader = () => Promise<string | null>

@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { storage, type WxtStorageItem } from 'wxt/utils/storage'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import {
   MAX_REPOSITORY_PREFERENCE_COUNT,
   MAX_SAVED_FILTER_COUNT,
@@ -20,7 +20,7 @@ import {
 } from '../domain/WorkspacePreferences'
 import type { WorkspacePreferencesRepository } from '../ports/WorkspacePreferencesRepository'
 
-const logger = createLogger('workspacePreferences.storage')
+const logger = rootLogger.child({ scope: "workspacePreferences.storage" })
 
 export const WORKSPACE_PREFERENCES_STORAGE_VERSION = 1
 export const MAX_WORKSPACE_PREFERENCES_SYNC_ITEM_BYTES = 7_500

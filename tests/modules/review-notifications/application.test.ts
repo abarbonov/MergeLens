@@ -7,7 +7,12 @@ const logger = vi.hoisted(() => ({
   error: vi.fn(),
 }))
 
-vi.mock('@/shared/logging/logger', () => ({ createLogger: () => logger }))
+vi.mock('@/shared/logging', () => ({
+  logger: {
+    ...logger,
+    child: () => logger,
+  },
+}))
 import {
   EMPTY_REVIEW_NOTIFICATION_SNAPSHOT,
   type ReviewNotificationCandidate,

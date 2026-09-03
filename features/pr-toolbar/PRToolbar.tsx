@@ -2,11 +2,11 @@ import { NotebookPen } from 'lucide-react'
 import { useEffect } from 'react'
 import { LocalReviewPanel } from '@/features/local-review/LocalReviewPanel'
 import type { CheckStatus } from '@/modules/pull-requests'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import type { PRToolbarError, PRToolbarProps } from './types'
 import './PRToolbar.css'
 
-const logger = createLogger('prToolbar.ui')
+const logger = rootLogger.child({ scope: "prToolbar.ui" })
 
 const CHECK_STATUS_LABELS: Record<CheckStatus, string> = {
   'action-required': 'Action required',

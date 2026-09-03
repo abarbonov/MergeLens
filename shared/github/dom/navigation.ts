@@ -1,8 +1,8 @@
 import type { PullRequestPageContext } from '../context/PageContext'
 import { parsePageContext } from '../context/parsePageContext'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 
-const logger = createLogger('github.dom.navigation')
+const logger = rootLogger.child({ scope: "github.dom.navigation" })
 
 export interface LocationChangeDetail {
   newUrl: URL

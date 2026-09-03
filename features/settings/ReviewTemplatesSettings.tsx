@@ -8,7 +8,7 @@ import {
   type ReviewTemplate,
   type ReviewTemplateDraft,
 } from '@/modules/local-review'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import {
   createCorrelationId,
   isReceiverUnavailableError,
@@ -19,7 +19,7 @@ import {
 } from '@/shared/messaging/protocol'
 import './ReviewTemplatesSettings.css'
 
-const logger = createLogger('settings.reviewTemplates')
+const logger = rootLogger.child({ scope: "settings.reviewTemplates" })
 
 type TemplatesOperation = 'load' | 'save' | 'delete'
 

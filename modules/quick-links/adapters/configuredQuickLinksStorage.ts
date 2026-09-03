@@ -1,9 +1,9 @@
 import { z } from 'zod'
 import { storage } from 'wxt/utils/storage'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import type { ConfiguredQuickLink } from '../domain/QuickLinks'
 
-const logger = createLogger('quickLinks.configuredStorage')
+const logger = rootLogger.child({ scope: "quickLinks.configuredStorage" })
 const configuredLinkSchema = z.object({
   id: z.string().min(1),
   label: z.string().trim().min(1).max(80),

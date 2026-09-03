@@ -18,10 +18,10 @@ import {
 } from '@/modules/local-review'
 import { readConfiguredQuickLinks } from '@/modules/quick-links/settings'
 import { registerReviewNotificationBackground } from '@/modules/review-notifications'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import { onMessage } from '@/shared/messaging/protocol'
 
-const logger = createLogger('background')
+const logger = rootLogger.child({ scope: "background" })
 
 export default defineBackground(() => {
   registerReviewNotificationBackground()

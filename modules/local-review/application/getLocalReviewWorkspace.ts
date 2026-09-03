@@ -1,4 +1,4 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import {
   parseGetLocalReviewWorkspaceRequest,
   parseGetLocalReviewWorkspaceResponse,
@@ -18,7 +18,7 @@ import {
   toLocalReviewError,
 } from './operation'
 
-const logger = createLogger('localReview.getWorkspace')
+const logger = rootLogger.child({ scope: "localReview.getWorkspace" })
 
 export const createGetLocalReviewWorkspace = (
   repository: LocalReviewRepository,

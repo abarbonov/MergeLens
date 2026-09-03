@@ -1,11 +1,11 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import type { ReviewNotificationDelivery } from '../domain/ReviewNotification'
 import type {
   ReviewNotificationPresenter,
   ReviewNotificationTabOpener,
 } from '../ports/ReviewNotificationBrowser'
 
-const logger = createLogger('reviewNotifications.presenter')
+const logger = rootLogger.child({ scope: "reviewNotifications.presenter" })
 
 const parseGitHubPullRequestUrl = (value: string): string => {
   const url = new URL(value)

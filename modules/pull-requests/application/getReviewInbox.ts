@@ -1,4 +1,4 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import {
   parseReviewInboxRequest,
   parseReviewInboxResponse,
@@ -15,7 +15,7 @@ import type {
 } from '../domain/ReviewInbox'
 import type { ReviewInboxReader } from '../ports/ReviewInboxReader'
 
-const logger = createLogger('pullRequests.getReviewInbox')
+const logger = rootLogger.child({ scope: "pullRequests.getReviewInbox" })
 const SECTION_LIMIT = 10
 const REASON_ORDER: ReviewInboxReason[] = [
   'review-requested',

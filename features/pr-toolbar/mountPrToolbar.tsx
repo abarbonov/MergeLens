@@ -8,7 +8,7 @@ import {
   findPullRequestToolbarAnchor,
   resolvePullRequestToolbarAnchorSelector,
 } from '@/shared/github/dom/selectors'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import {
   createCorrelationId,
   isReceiverUnavailableError,
@@ -19,7 +19,7 @@ import { PRToolbar } from './PRToolbar'
 import type { PRToolbarState } from './types'
 import './PRToolbar.css'
 
-const logger = createLogger('prToolbar.mount')
+const logger = rootLogger.child({ scope: "prToolbar.mount" })
 
 const appendToolbar = (anchor: Element, ui: Element): void => {
   if (anchor.id === 'diff-comparison-viewer-container') {

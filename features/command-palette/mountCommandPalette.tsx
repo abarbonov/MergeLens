@@ -1,11 +1,11 @@
 import { createRoot, type Root } from 'react-dom/client'
 import type { ContentScriptContext } from 'wxt/utils/content-script-context'
 import { createShadowRootUi } from 'wxt/utils/content-script-ui/shadow-root'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import { CommandPalette, type CommandPaletteProps } from './CommandPalette'
 import './CommandPalette.css'
 
-const logger = createLogger('commandPalette.mount')
+const logger = rootLogger.child({ scope: "commandPalette.mount" })
 
 export interface CommandPaletteUi {
   mount: () => void

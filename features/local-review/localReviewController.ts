@@ -4,7 +4,7 @@ import {
   type CanonicalPullRequestIdentity,
   type PullRequestIdentity,
 } from '@/modules/local-review'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import {
   createCorrelationId,
   isReceiverUnavailableError,
@@ -21,7 +21,7 @@ import type {
   LocalReviewTransport,
 } from './types'
 
-const logger = createLogger('localReview.controller')
+const logger = rootLogger.child({ scope: "localReview.controller" })
 const DEFAULT_AUTOSAVE_DEBOUNCE_MS = 600
 
 interface SaveSnapshot {

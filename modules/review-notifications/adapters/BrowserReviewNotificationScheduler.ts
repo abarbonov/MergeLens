@@ -1,8 +1,8 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import { REVIEW_NOTIFICATION_ALARM_NAME } from '../domain/ReviewNotification'
 import type { ReviewNotificationAlarmScheduler } from '../ports/ReviewNotificationBrowser'
 
-const logger = createLogger('reviewNotifications.scheduler')
+const logger = rootLogger.child({ scope: "reviewNotifications.scheduler" })
 
 export class BrowserReviewNotificationScheduler implements ReviewNotificationAlarmScheduler {
   async getIntervalMinutes(): Promise<number | null> {

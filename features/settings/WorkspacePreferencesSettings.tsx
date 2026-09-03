@@ -21,9 +21,9 @@ import {
   type WorkspacePreferencesError,
   type WorkspacePreferencesState,
 } from '@/modules/workspace-preferences'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 
-const logger = createLogger('settings.workspacePreferences')
+const logger = rootLogger.child({ scope: "settings.workspacePreferences" })
 
 type Operation =
   | 'load'

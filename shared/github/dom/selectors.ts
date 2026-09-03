@@ -1,6 +1,6 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 
-const logger = createLogger('github.dom.selectors')
+const logger = rootLogger.child({ scope: "github.dom.selectors" })
 
 export const PR_TOOLBAR_ANCHOR_SELECTORS = [
   '#diff-comparison-viewer-container',

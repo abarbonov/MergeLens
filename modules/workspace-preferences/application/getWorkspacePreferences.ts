@@ -1,4 +1,4 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import type { WorkspacePreferencesRepository } from '../ports/WorkspacePreferencesRepository'
 import type {
   WorkspacePreferencesResult,
@@ -10,7 +10,7 @@ import {
   toWorkspacePreferencesError,
 } from './operation'
 
-const logger = createLogger('workspacePreferences.getWorkspacePreferences')
+const logger = rootLogger.child({ scope: "workspacePreferences.getWorkspacePreferences" })
 
 export const createGetWorkspacePreferences =
   (repository: WorkspacePreferencesRepository) =>

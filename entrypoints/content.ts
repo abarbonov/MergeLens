@@ -4,14 +4,14 @@ import {
 } from '@/features/command-palette'
 import { observePageContext } from '@/shared/github/dom/navigation'
 import { mountPrToolbar } from '@/features/pr-toolbar/mountPrToolbar'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import { onMessage } from '@/shared/messaging/protocol'
 import {
   getEffectiveWorkspacePreferences,
   subscribeWorkspacePreferences,
 } from '@/modules/workspace-preferences'
 
-const logger = createLogger('content')
+const logger = rootLogger.child({ scope: "content" })
 
 export default defineContentScript({
   matches: ['https://github.com/*'],

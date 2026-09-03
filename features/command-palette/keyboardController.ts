@@ -1,11 +1,11 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import type { CommandShortcut } from './types'
 import {
   DEFAULT_COMMAND_SHORTCUT,
   isSupportedCommandShortcut,
 } from './shortcuts'
 
-const logger = createLogger('commandPalette.keyboard')
+const logger = rootLogger.child({ scope: "commandPalette.keyboard" })
 
 export interface KeyboardControllerCallbacks {
   open: () => void

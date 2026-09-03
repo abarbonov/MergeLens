@@ -4,10 +4,10 @@ import {
   hasLocalGitHubToken,
   saveLocalGitHubToken,
 } from '@/shared/github/auth/localToken'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import './TokenSettings.css'
 
-const logger = createLogger('settings.token')
+const logger = rootLogger.child({ scope: 'settings.token' })
 
 type TokenStatus = 'loading' | 'configured' | 'missing' | 'error'
 

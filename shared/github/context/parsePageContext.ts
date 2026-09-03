@@ -1,7 +1,7 @@
 import type { PullRequestPageContext } from './PageContext'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 
-const logger = createLogger('github.context.parsePageContext')
+const logger = rootLogger.child({ scope: "github.context.parsePageContext" })
 const GITHUB_HOSTNAME = 'github.com'
 
 export const parsePageContext = (

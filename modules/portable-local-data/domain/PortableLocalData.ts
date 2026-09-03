@@ -30,9 +30,9 @@ import {
   type RepositoryWorkspacePreferences,
   type SavedInboxFilter,
 } from '@/modules/workspace-preferences'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 
-const logger = createLogger('portableLocalData.validation')
+const logger = rootLogger.child({ scope: "portableLocalData.validation" })
 
 export const PORTABLE_LOCAL_DATA_FORMAT = 'mergelens-portable-local-data'
 export const PORTABLE_LOCAL_DATA_SCHEMA_VERSION = 1

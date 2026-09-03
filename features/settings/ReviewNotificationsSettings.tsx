@@ -7,10 +7,10 @@ import {
   WxtReviewNotificationStateRepository,
   type ReviewNotificationPreferences,
 } from '@/modules/review-notifications'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import './ReviewNotificationsSettings.css'
 
-const logger = createLogger('settings.reviewNotifications')
+const logger = rootLogger.child({ scope: "settings.reviewNotifications" })
 
 export interface ReviewNotificationsSettingsServices {
   getPreferences(): Promise<ReviewNotificationPreferences>

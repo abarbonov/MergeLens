@@ -1,5 +1,5 @@
 import type { ContentScriptContext } from 'wxt/utils/content-script-context'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import {
   isReceiverUnavailableError,
   sendMessage,
@@ -20,7 +20,7 @@ import {
 } from '@/modules/workspace-preferences'
 import { DEFAULT_COMMAND_SHORTCUT, getCommandShortcut } from './shortcuts'
 
-const logger = createLogger('commandPalette.controller')
+const logger = rootLogger.child({ scope: "commandPalette.controller" })
 const activeControllers = new WeakMap<Window, CommandPaletteController>()
 
 export interface PaletteControllerUi {

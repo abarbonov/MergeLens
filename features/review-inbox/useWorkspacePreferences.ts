@@ -9,9 +9,9 @@ import {
   type SavedInboxFilter,
   type WorkspacePreferencesErrorCode,
 } from '@/modules/workspace-preferences'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 
-const logger = createLogger('reviewInbox.workspacePreferences')
+const logger = rootLogger.child({ scope: "reviewInbox.workspacePreferences" })
 
 export const WORKSPACE_PREFERENCES_QUERY_KEY = [
   'workspace-preferences',

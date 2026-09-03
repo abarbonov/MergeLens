@@ -1,4 +1,4 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import {
   parseQuickLinksRequest,
   parseQuickLinksResponse,
@@ -9,7 +9,7 @@ import type {
 } from '@/shared/messaging/schemas'
 import type { QuickLinksReader } from '../ports/QuickLinksReader'
 
-const logger = createLogger('quickLinks.getPullRequestQuickLinks')
+const logger = rootLogger.child({ scope: "quickLinks.getPullRequestQuickLinks" })
 
 const getSafeCorrelationId = (input: unknown): string => {
   return typeof input === 'string' && input.length >= 1 && input.length <= 128

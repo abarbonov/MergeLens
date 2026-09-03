@@ -1,4 +1,4 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import {
   REVIEW_NOTIFICATION_ALARM_NAME,
   REVIEW_NOTIFICATION_ID_PREFIX,
@@ -15,7 +15,7 @@ import { BrowserReviewNotificationScheduler } from './BrowserReviewNotificationS
 import { OctokitReviewNotificationSource } from './OctokitReviewNotificationSource'
 import { WxtReviewNotificationStateRepository } from './ReviewNotificationStorage'
 
-const logger = createLogger('reviewNotifications.background')
+const logger = rootLogger.child({ scope: "reviewNotifications.background" })
 
 export interface ReviewNotificationBackgroundDependencies {
   repository?: WxtReviewNotificationStateRepository

@@ -10,9 +10,9 @@ import {
   isExpectedWorkspacePreferencesError,
   toWorkspacePreferencesError,
 } from './operation'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 
-const logger = createLogger('workspacePreferences.getEffective')
+const logger = rootLogger.child({ scope: "workspacePreferences.getEffective" })
 
 export interface EffectiveWorkspacePreferencesSnapshot {
   preferences: EffectiveWorkspacePreferences

@@ -1,4 +1,4 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import type {
   Command,
   CommandContext,
@@ -7,7 +7,7 @@ import type {
   CommandId,
 } from './types'
 
-const logger = createLogger('commandPalette.registry')
+const logger = rootLogger.child({ scope: "commandPalette.registry" })
 
 const normalizeSearchValue = (value: string): string =>
   value.trim().toLocaleLowerCase()

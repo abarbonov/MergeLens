@@ -51,13 +51,19 @@ vi.mock('@/modules/quick-links/settings', () => ({
   readConfiguredQuickLinks: vi.fn(),
 }))
 
-vi.mock('@/shared/logging/logger', () => ({
-  createLogger: () => ({
+vi.mock('@/shared/logging', () => ({
+  logger: {
     debug: vi.fn(),
     info: vi.fn(),
     warn: vi.fn(),
     error: vi.fn(),
-  }),
+    child: () => ({
+      debug: vi.fn(),
+      info: vi.fn(),
+      warn: vi.fn(),
+      error: vi.fn(),
+    }),
+  },
 }))
 
 vi.mock('@/shared/messaging/protocol', () => ({

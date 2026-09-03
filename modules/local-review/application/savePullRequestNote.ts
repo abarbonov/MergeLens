@@ -1,4 +1,4 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import {
   parseSavePullRequestNoteRequest,
   parseSavePullRequestNoteResponse,
@@ -20,7 +20,7 @@ import {
   toLocalReviewError,
 } from './operation'
 
-const logger = createLogger('localReview.saveNote')
+const logger = rootLogger.child({ scope: "localReview.saveNote" })
 
 export const createSavePullRequestNote = (
   repository: LocalReviewRepository,

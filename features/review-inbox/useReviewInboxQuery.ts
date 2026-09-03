@@ -4,7 +4,7 @@ import {
   type UseQueryResult,
 } from '@tanstack/react-query'
 import { useEffect } from 'react'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import {
   createCorrelationId,
   isReceiverUnavailableError,
@@ -13,7 +13,7 @@ import {
 } from '@/shared/messaging/protocol'
 import { ReviewInboxQueryError, type ReviewInboxQueryData } from './types'
 
-const logger = createLogger('reviewInbox.query')
+const logger = rootLogger.child({ scope: "reviewInbox.query" })
 
 export const REVIEW_INBOX_QUERY_KEY = ['review-inbox'] as const
 export const REVIEW_INBOX_STALE_TIME = 30_000

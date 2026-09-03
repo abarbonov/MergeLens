@@ -11,11 +11,11 @@ import {
   type ReviewInboxView,
   type SavedInboxFilter,
 } from '@/modules/workspace-preferences'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import { ReviewInboxItem } from './ReviewInboxItem'
 import './ReviewInbox.css'
 
-const logger = createLogger('reviewInbox.ui')
+const logger = rootLogger.child({ scope: "reviewInbox.ui" })
 
 interface ReviewInboxProps {
   data?: ReviewInboxData

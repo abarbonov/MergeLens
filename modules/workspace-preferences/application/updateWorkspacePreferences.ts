@@ -1,4 +1,4 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import {
   normalizeRepositoryKey,
   normalizeRepositoryWorkspacePreferences,
@@ -15,7 +15,7 @@ import {
   toWorkspacePreferencesError,
 } from './operation'
 
-const logger = createLogger('workspacePreferences.updateWorkspacePreferences')
+const logger = rootLogger.child({ scope: "workspacePreferences.updateWorkspacePreferences" })
 
 export const createUpdateWorkspacePreferences =
   (repository: WorkspacePreferencesRepository) =>

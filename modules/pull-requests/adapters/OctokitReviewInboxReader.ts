@@ -1,7 +1,7 @@
 import { Octokit } from '@octokit/rest'
 import { z } from 'zod'
 import { readLocalGitHubToken } from '@/shared/github/auth/localToken'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import type {
   ReviewInboxError,
   ReviewInboxSectionKind,
@@ -13,7 +13,7 @@ import type {
 } from '../ports/ReviewInboxReader'
 import { mapReviewInboxSearchItems } from './mapReviewInboxResponse'
 
-const logger = createLogger('github.api.reviewInboxReader')
+const logger = rootLogger.child({ scope: "github.api.reviewInboxReader" })
 const MAX_SECTION_ITEMS = 20
 
 type TokenReader = () => Promise<string | null>

@@ -1,4 +1,4 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import type { SavedInboxFilter } from '../domain/WorkspacePreferences'
 import type { WorkspacePreferencesRepository } from '../ports/WorkspacePreferencesRepository'
 import type { WorkspacePreferencesResult } from './contracts'
@@ -8,7 +8,7 @@ import {
   toWorkspacePreferencesError,
 } from './operation'
 
-const logger = createLogger('workspacePreferences.listSavedFilters')
+const logger = rootLogger.child({ scope: "workspacePreferences.listSavedFilters" })
 
 export const createListSavedFilters =
   (repository: WorkspacePreferencesRepository) =>

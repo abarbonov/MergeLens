@@ -1,4 +1,4 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import {
   parseListReviewTemplatesRequest,
   parseListReviewTemplatesResponse,
@@ -15,7 +15,7 @@ import {
   toLocalReviewError,
 } from './operation'
 
-const logger = createLogger('localReview.listTemplates')
+const logger = rootLogger.child({ scope: "localReview.listTemplates" })
 
 export const createListReviewTemplates = (
   repository: LocalReviewRepository,

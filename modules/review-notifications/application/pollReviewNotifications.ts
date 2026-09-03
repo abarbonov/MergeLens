@@ -1,4 +1,4 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import {
   MAX_NOTIFICATION_ROUTES,
   createReviewNotificationDiff,
@@ -10,7 +10,7 @@ import type {
   ReviewNotificationTrigger,
 } from './contracts'
 
-const logger = createLogger('reviewNotifications.poll')
+const logger = rootLogger.child({ scope: "reviewNotifications.poll" })
 
 export const createPollReviewNotifications = (
   dependencies: PollReviewNotificationsDependencies,

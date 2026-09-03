@@ -1,5 +1,5 @@
 import { defineExtensionMessaging } from '@webext-core/messaging'
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import {
   deleteReviewTemplateRequestSchema,
   deleteReviewTemplateResponseSchema,
@@ -37,7 +37,7 @@ import {
   type UpsertReviewTemplateResponse,
 } from './schemas'
 
-const logger = createLogger('messaging')
+const logger = rootLogger.child({ scope: "messaging" })
 
 export interface MergeLensProtocolMap {
   getPullRequestToolbarData(data: ToolbarRequest): ToolbarResponse

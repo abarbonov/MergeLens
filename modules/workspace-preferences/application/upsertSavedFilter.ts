@@ -1,4 +1,4 @@
-import { createLogger } from '@/shared/logging/logger'
+import { logger as rootLogger } from '@/shared/logging'
 import type { SavedInboxFilter } from '../domain/WorkspacePreferences'
 import { WorkspacePreferencesValidationError } from '../domain/WorkspacePreferences'
 import type { WorkspacePreferencesRepository } from '../ports/WorkspacePreferencesRepository'
@@ -14,7 +14,7 @@ import {
   upsertSavedInboxFilter,
 } from './operation'
 
-const logger = createLogger('workspacePreferences.upsertSavedFilter')
+const logger = rootLogger.child({ scope: "workspacePreferences.upsertSavedFilter" })
 
 const createDefaultId = (): string => crypto.randomUUID()
 
